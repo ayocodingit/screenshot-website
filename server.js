@@ -2,8 +2,8 @@ require('dotenv').config();
 const bodyParser = require('body-parser')
 const express = require('express')
 const cors = require('cors')
-const screenshot = require('./screenshot');
-const verify = require('./verify');
+const screenshot = require('./utils/screenshot');
+const verify = require('./utils/verify');
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
