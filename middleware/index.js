@@ -1,13 +1,13 @@
 const Joi = require('joi')
 
-const schema = Joi.object().keys({
-  git: Joi.string().required().valid('gitlab', 'github'),
+const schema = Joi.object({
+  git: Joi.string().allow(null).valid('gitlab', 'github'),
   url: Joi.string().required().uri()
-});
+})
 
 const middleware = () => {
   return (req, res, next) => {
-    const { error } = Joi.validate(req.body, schema);
+    const { error } = schema.validate(req.body);
     if (error) {
       const { details } = error;
       const message = details.map(i => i.message).join(',');

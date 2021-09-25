@@ -5,11 +5,13 @@ const cors = require('cors')
 const screenshot = require('./utils/screenshot');
 const verify = require('./utils/verify');
 const middleware = require('./middleware');
+require('./utils/schedule')
 
 const app = express()
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use('/tmp', express.static('tmp'))
 
 app.post('/', middleware(), async (req, res) => {
   try {
