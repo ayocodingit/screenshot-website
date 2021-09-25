@@ -2,7 +2,7 @@ const Joi = require('joi')
 
 const schema = Joi.object().keys({
   git: Joi.string().required().valid('gitlab', 'github'),
-  url: Joi.string().required().url()
+  url: Joi.string().required().uri()
 });
 
 const middleware = () => {
