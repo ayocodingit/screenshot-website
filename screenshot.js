@@ -34,7 +34,7 @@ const screenshot = async (url, git, host) => {
   await page.goto(url, { waitUntil: 'load' })
   if (await page.$(option.tagUsername) !== null) {
     await page.type(option.tagUsername, process.env.ACCOUNT)
-    await page.type(option.tagPassword, process.env.PASSWORD)
+    await page.type(option.tagPassword, Buffer.from(process.env.PASSWORD, 'base64').toString())
     await Promise.all([
       page.click(option.tagSubmit),
       page.waitForNavigation({ waitUntil: 'networkidle0' })
