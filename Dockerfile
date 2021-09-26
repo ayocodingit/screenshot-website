@@ -6,13 +6,14 @@ RUN apk add chromium \
       harfbuzz \
       ca-certificates \
       ttf-freefont \
-      nodejs
+      nodejs \
+      yarn
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
