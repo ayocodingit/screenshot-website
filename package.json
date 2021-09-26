@@ -18,7 +18,8 @@
     "fs": "0.0.1-security",
     "joi": "^17.4.2",
     "node-schedule": "^2.0.0",
-    "puppeteer": "^10.4.0"
+    "puppeteer": "^10.4.0",
+    "puppeteer-core": "^10.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

@@ -7,7 +7,8 @@ RUN apk add chromium \
       ca-certificates \
       ttf-freefont \
       nodejs \
-      yarn
+      yarn \
+      && rm -rf /var/cache/*
 
 WORKDIR /app
 
