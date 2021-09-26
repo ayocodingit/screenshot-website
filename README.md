@@ -12,3 +12,7 @@ curl -d "url=https://google.com" https://screenshot-website.herokuapp.com/
 
 result
 ![image](https://user-images.githubusercontent.com/41193120/134798092-448f9852-5534-43d6-b573-4834b1b33c8d.png)
+
+
+## Attention
+Photos that have been saved will be deleted every 23:59
