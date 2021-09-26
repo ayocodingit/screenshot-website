@@ -72,7 +72,7 @@ const screenshot = async (url, host) => {
   await page.goto(url, { waitUntil: 'load' })
   await page.screenshot({ path: filePath })
   await browser.close()
-  return host + '/' + filePath
+  return filePath
 }
 
 module.exports = screenshot

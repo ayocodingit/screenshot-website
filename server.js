@@ -18,7 +18,7 @@ app.post('/', middleware(), async (req, res) => {
     const { url } = req.body
     const host = req.headers.host
     const filePath = await screenshot(url, host)
-    return res.json({filePath: filePath})
+    return res.json({filePath: `https://${host}/${filePath}`})
   } catch (error) {
     console.log(error.message)
     return res.status(403).json({ error: error.message })
