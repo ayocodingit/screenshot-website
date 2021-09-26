@@ -1,11 +1,33 @@
+FROM alpine:edge
 
-FROM zenika/alpine-chrome:with-node
+RUN apk add chromium \
+      nss \
+      freetype \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont \
+      nodejs
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD 1
-ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
-WORKDIR /usr/src/app
-COPY --chown=chrome package.json package-lock.json ./
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
 RUN npm install
-COPY --chown=chrome . ./
-ENTRYPOINT ["tini", "--"]
+
+COPY . .
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+# Add user so we don't need --no-sandbox.
+RUN addgroup -S pptruser && adduser -S -g pptruser pptruser \
+    && mkdir -p /home/pptruser/Downloads /app /app/tmp \
+    && chown -R pptruser:pptruser /home/pptruser \
+    && chown -R pptruser:pptruser /app
+
+# Run everything after as non-privileged user.
+USER pptruser
+
+EXPOSE 3333
+
 CMD ["node", "server.js"]
