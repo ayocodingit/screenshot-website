@@ -6,7 +6,7 @@ Example
 
 curl post send url
 ```bash
-curl -d "url=https://google.com" https://screenshot-website.herokuapp.com/
+curl -d "url=https://google.com" https://screenshot-website.herokuapp.com/?api_key=1234
 
 ```
 
