@@ -20,9 +20,9 @@ app.use('/' + dir, express.static(dir))
 app.post('/', middleware(), async (req: any, res: any) => {
   try {
     await verifyApiKey(req.query.api_key)
-    const host = req.headers.host
-    const filePath = await screenshot(url(req))
-    return res.send(`${http()}://${host}/${filePath}`)
+    const host: string = req.headers.host
+    const filePath: string | null = await screenshot(url(req))
+    return res.send(filePath ? `${http()}://${host}/${filePath}` : null)
   } catch (error: any) {
     console.log(error.message)
     return res.status(403).send(error.message)

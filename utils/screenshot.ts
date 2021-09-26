@@ -15,13 +15,14 @@ const args = [
   '--disable-web-security'
 ]
 
-const screenshot = async (url: string) => {
-  let filePath = generateFilePath()
+const screenshot = async (url: string): Promise <string | null> => {
+  let filePath: string | null = generateFilePath()
   const browser = await puppeteer.launch({ args: args })
   const page = await browser.newPage()
   await page.setViewport({ height: 1280, width: 1280 })
   await page.goto(url, { waitUntil: 'load' })
-  await page.screenshot({ path: filePath })
+  if (await page.url() === url) await page.screenshot({ path: filePath })
+  else filePath = null
   await browser.close()
   return filePath
 }
