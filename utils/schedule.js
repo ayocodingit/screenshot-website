@@ -1,7 +1,7 @@
 require('dotenv').config();
 const schedule = require('node-schedule');
-const fs = require('fs')
-const dir = 'tmp'
+const fs = require('fs');
+const dir = require('./dir');
 
 const run = () => {
   schedule.scheduleJob(process.env.SCHEDULE, function(){

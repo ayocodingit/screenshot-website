@@ -1,9 +1,9 @@
 
 const puppeteer = require('puppeteer')
-const fs = require('fs')
+const fs = require('fs');
+const dir = require('./dir');
 require('dotenv').config();
 
-const dir = 'tmp'
 const tagOption = {
   github: {
     tagUsername: 'input[name=login]',
@@ -38,7 +38,7 @@ const gitLogin = async (page, git) => {
 
 const screenshot = async (url, git, host) => {
   let filePath = generateFilePath()
-  const browser = await puppeteer.launch({ headless: false, args: ['--no-sandbox', '--disable-web-security'] })
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-web-security'] })
   const page = await browser.newPage()
   await page.setViewport({ height: 1280, width: 1080 })
   await page.goto(url, { waitUntil: 'load' })
