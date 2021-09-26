@@ -20,7 +20,7 @@ const screenshot = async (url) => {
   let filePath = generateFilePath()
   const browser = await puppeteer.launch({ args: args })
   const page = await browser.newPage()
-  await page.setViewport({ height: 1280, width: 1080 })
+  await page.setViewport({ height: 1280, width: 1280 })
   await page.goto(url, { waitUntil: 'load' })
   await page.screenshot({ path: filePath })
   await browser.close()

@@ -7,6 +7,7 @@ const middleware = require('./middleware');
 const dir = require('./utils/dir');
 const http = require('./utils/http');
 const url = require('./utils/url');
+const verifyApiKey = require('./utils/verifyApiKey');
 require('./utils/schedule')
 
 const app = express()
@@ -17,6 +18,7 @@ app.use('/' + dir, express.static(dir))
 
 app.post('/', middleware(), async (req, res) => {
   try {
+    await verifyApiKey(req.query.api_key)
     const host = req.headers.host
     const filePath = await screenshot(url(req))
     return res.send(`${http()}://${host}/${filePath}`)
