@@ -31,4 +31,8 @@ USER pptruser
 
 EXPOSE 3333
 
-CMD ["node", "server.js"]
+RUN yarn run build
+
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT [ "./entrypoint.sh" ]

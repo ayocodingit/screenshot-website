@@ -1,8 +1,7 @@
 
-const puppeteer = require('puppeteer')
-const fs = require('fs');
-const dir = require('./dir');
-require('dotenv').config();
+import puppeteer from 'puppeteer'
+import fs from 'fs';
+import dir from './dir'
 
 const generateFilePath = () => {
   if (!fs.existsSync(dir)) {
@@ -16,7 +15,7 @@ const args = [
   '--disable-web-security'
 ]
 
-const screenshot = async (url) => {
+const screenshot = async (url: string) => {
   let filePath = generateFilePath()
   const browser = await puppeteer.launch({ args: args })
   const page = await browser.newPage()
@@ -27,4 +26,4 @@ const screenshot = async (url) => {
   return filePath
 }
 
-module.exports = screenshot
+export default screenshot

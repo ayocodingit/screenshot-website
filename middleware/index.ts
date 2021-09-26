@@ -1,5 +1,5 @@
 const middleware = () => {
-  return (req, res, next) => {
+  return (req: any, res: any, next: any) => {
     if (!req.body.url) {
       return res.status(422).json({ error: 'url is required' })
     } else {
@@ -7,4 +7,4 @@ const middleware = () => {
     }
   }
 }
-module.exports = middleware;
+export default middleware;
