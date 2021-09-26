@@ -71,7 +71,8 @@ const minimal_args = [
   '--password-store=basic',
   '--use-gl=swiftshader',
   '--use-mock-keychain',
-  '--disable-web-securit'
+  '--disable-web-security',
+  '--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36"'
 ]
 
 const blocked_domains = [
@@ -83,6 +84,8 @@ const screenshot = async (url, git, host) => {
   let filePath = generateFilePath()
   const browser = await puppeteer.launch({ args: minimal_args })
   const page = await browser.newPage()
+  await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3312.0 Safari/537.36');
+  await page.emulateTimezone('Asia/Jakarta')
   page.on('request', request => {
     const url = request.url()
     if (blocked_domains.some(domain => url.includes(domain))) {
