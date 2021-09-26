@@ -1,7 +1,6 @@
 const Joi = require('joi')
 
 const schema = Joi.object({
-  git: Joi.string().allow(null).valid('gitlab', 'github'),
   url: Joi.string().required().uri()
 })
 

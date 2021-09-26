@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const cors = require('cors')
 const screenshot = require('./utils/screenshot');
-const verify = require('./utils/verify');
 const middleware = require('./middleware');
 const dir = require('./utils/dir');
 require('./utils/schedule')
@@ -16,10 +15,9 @@ app.use('/' + dir, express.static(dir))
 
 app.post('/', middleware(), async (req, res) => {
   try {
-    await verify(req.query.secret)
-    const { url, git } = req.body
+    const { url } = req.body
     const host = req.headers.host
-    const filePath = await screenshot(url, git, host)
+    const filePath = await screenshot(url, host)
     return res.json({filePath: filePath})
   } catch (error) {
     console.log(error.message)
