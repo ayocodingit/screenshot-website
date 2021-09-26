@@ -5,6 +5,8 @@ const cors = require('cors')
 const screenshot = require('./utils/screenshot');
 const middleware = require('./middleware');
 const dir = require('./utils/dir');
+const http = require('./utils/http');
+const url = require('./utils/url');
 require('./utils/schedule')
 
 const app = express()
@@ -15,10 +17,9 @@ app.use('/' + dir, express.static(dir))
 
 app.post('/', middleware(), async (req, res) => {
   try {
-    const { url } = req.body
     const host = req.headers.host
-    const filePath = await screenshot(url, host)
-    return res.send(`https://${host}/${filePath}`)
+    const filePath = await screenshot(url(req))
+    return res.send(`${http()}://${host}/${filePath}`)
   } catch (error) {
     console.log(error.message)
     return res.status(403).send(error.message)

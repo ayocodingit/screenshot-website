@@ -1,16 +1,7 @@
-const Joi = require('joi')
-
-const schema = Joi.object({
-  url: Joi.string().required()
-})
-
 const middleware = () => {
   return (req, res, next) => {
-    const { error } = schema.validate(req.body);
-    if (error) {
-      const { details } = error;
-      const message = details.map(i => i.message).join(',');
-      return res.status(422).json({ error: message })
+    if (!req.body.url) {
+      return res.status(422).json({ error: 'url is required' })
     } else {
       next()
     }
