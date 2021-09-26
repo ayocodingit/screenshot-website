@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 const schema = Joi.object({
-  url: Joi.string().required().uri()
+  url: Joi.string().required()
 })
 
 const middleware = () => {
