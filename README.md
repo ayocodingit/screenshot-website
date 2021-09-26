@@ -1,4 +1,4 @@
-# Screenshot
+# Screenshot Website
 
 ## How to Use
 
