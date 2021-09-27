@@ -21,7 +21,7 @@ const screenshot = async (url: string): Promise <string | null> => {
   const page = await browser.newPage()
   await page.setViewport({ height: 1280, width: 1280 })
   await page.goto(url, { waitUntil: 'load' })
-  if (await page.url() === url || await page.$('input[name=login]') === null) await page.screenshot({ path: filePath })
+  if (await page.url() === url && await page.$('input[name=login]') === null) await page.screenshot({ path: filePath })
   else filePath = null
   await browser.close()
   return filePath
