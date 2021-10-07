@@ -17,8 +17,9 @@ const args = [
 
 const screenshot = async (url: string): Promise <string | null> => {
   let filePath: string | null = generateFilePath()
-  const browser = await puppeteer.launch({ args: args })
+  const browser = await puppeteer.launch({ headless: false, args: args })
   const page = await browser.newPage()
+  await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
   await page.setViewport({ height: 1280, width: 1280 })
   await page.goto(url, { waitUntil: 'load' })
   if (await page.url() === url && await page.$('input[name=login]') === null) await page.screenshot({ path: filePath })
