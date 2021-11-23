@@ -23,7 +23,7 @@ app.post('/', middleware(), async (req: any, res: any) => {
     const host = req.headers.host
     const filePath = await screenshot(url(req))
     return res.send(filePath ? `${http()}://${host}/${filePath}` : null)
-  } catch (error) {
+  } catch (error: any) {
     return res.status(403).send(error.message)
   }
 })
